@@ -11,7 +11,7 @@ services:
   
   web:
     restart: always
-    image: registry.gitlab.com/kuper-adrian/turnip-exchange/web:$IMAGE_TAG
+    image: registry.gitlab.com/kuper-adrian/turnip-exchange-web:$IMAGE_TAG
     build:
       context: .
       dockerfile: TurnipExchange/Dockerfile
@@ -21,7 +21,7 @@ services:
   
   nginx:
     restart: always
-    image: registry.gitlab.com/kuper-adrian/turnip-exchange/nginx:$IMAGE_TAG
+    image: registry.gitlab.com/kuper-adrian/turnip-exchange-nginx:$IMAGE_TAG
     build:
       context: .
       dockerfile: nginx/Dockerfile

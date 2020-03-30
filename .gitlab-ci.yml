@@ -17,8 +17,8 @@ variables:
   DOCKER_DRIVER: overlay2
 
   # convenience variables
-  WEB_IMAGE_NAME: registry.gitlab.com/kuper-adrian/turnip-exchange.com/web
-  NGINX_IMAGE_NAME: registry.gitlab.com/kuper-adrian/turnip-exchange.com/nginx
+  WEB_IMAGE_NAME: registry.gitlab.com/kuper-adrian/turnip-exchange-web
+  NGINX_IMAGE_NAME: registry.gitlab.com/kuper-adrian/turnip-exchange-nginx
 
 services:
   - docker:dind
