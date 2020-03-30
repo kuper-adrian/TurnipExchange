@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  
+  web:
+    restart: always
+    image: registry.gitlab.com/kuper-adrian/turnip-exchange/web:latest
+    build:
+      context: .
+      dockerfile: TurnipExchange/Dockerfile
+    container_name: turnip-exchange-web
+    environment:
+      ASPNETCORE_URLS: http://+:6000
+
+  nginx:
+    restart: always
+    image: registry.gitlab.com/kuper-adrian/turnip-exchange/nginx:latest
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: turnip-exchange-nginx
+    

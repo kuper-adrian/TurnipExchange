@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+
+  web:
+    volumes:
+      - ./TurnipExchange/Data/:/app/Data/
+
+  nginx:
+    volumes:
+      - ./nginx/dev-certs/:/etc/letsencrypt/live/turnip-exchange.com/
+    ports:
+      - 50080:80
+      - 50443:443
