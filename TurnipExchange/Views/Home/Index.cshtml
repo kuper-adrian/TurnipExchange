@@ -1,8 +1,62 @@
-﻿@{
+﻿@model TurnipExchange.Models.Home.IndexModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Your offer</h3>
+            <hr />
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (Model.CurrentOffer == null)
+                {
+                    <p>Please create a offer</p>
+                }
+                else
+                {
+                    <p>@Model.CurrentOffer.Price Bells</p>
+                }
+            }
+            else
+            {
+                <p>Please log in</p>
+            }
+        </div>
+        <div class="col-sm-8">
+            <h3>Current offers</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td scope="col">User</td>
+                        <td scope="col">Bells per Turnip</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var offer in Model.Top10Offers)
+                    {
+                    <tr>
+                        <td>
+                            @offer.User.UserName
+                        </td>
+                        <td>
+                            @offer.Price
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

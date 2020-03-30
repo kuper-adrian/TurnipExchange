@@ -15,10 +15,22 @@
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" disabled />
             </div>
+            <!--  -->
             <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <label asp-for="Input.SwitchAccountName"></label>
+                <input asp-for="Input.SwitchAccountName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.SwitchFriendCode"></label>
+                <input asp-for="Input.SwitchFriendCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AcIslandName"></label>
+                <input asp-for="Input.AcIslandName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AcVillagerName"></label>
+                <input asp-for="Input.AcVillagerName" class="form-control" />
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
