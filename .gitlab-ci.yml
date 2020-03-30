@@ -1,0 +1,121 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1.201-alpine3.10
+
+variables:
+  # When using dind service we need to instruct docker, to talk with the
+  # daemon started inside of the service. The daemon is available with
+  # a network connection instead of the default /var/run/docker.sock socket.
+  #
+  # The 'docker' hostname is the alias of the service container as described at
+  # https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#accessing-the-services
+  #
+  # Note that if you're using Kubernetes executor, the variable should be set to
+  # tcp://localhost:2375 because of how Kubernetes executor connects services
+  # to the job container
+  DOCKER_HOST: tcp://docker:2375/
+  # When using dind, it's wise to use the overlayfs driver for
+  # improved performance.
+  DOCKER_DRIVER: overlay2
+
+  # convenience variables
+  WEB_IMAGE_NAME: registry.gitlab.com/kuper-adrian/turnip-exchange.com/web
+  NGINX_IMAGE_NAME: registry.gitlab.com/kuper-adrian/turnip-exchange.com/nginx
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  paths:
+    - TurnipExchange/bin/Release/
+
+build:
+  stage: build
+  when: always
+  script:
+    - dotnet publish -c Release
+
+test:
+  stage: test
+  when: always
+  script:
+    - dotnet test -c Release
+
+deploy:
+  stage: deploy
+  when: manual
+  environment:
+    name: production
+    url: https://turnip-exchange.com
+  only:
+    - tags
+  before_script:
+    ##
+    ## Install ssh-agent if not already installed, it is required by Docker.
+    ## (change apt-get to yum if you use an RPM-based image)
+    ##
+    - 'which ssh-agent || ( apk update && apk add --no-chache openssh-client )'
+
+    ##
+    ## Run ssh-agent (inside the build environment)
+    ##
+    - eval $(ssh-agent -s)
+
+    ##
+    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    ## We're using tr to fix line endings which makes ed25519 keys work
+    ## without extra base64 encoding.
+    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+    ##
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+    ##
+    ## Create the SSH directory and give it the right permissions
+    ##
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    
+    ##
+    ## Add server to known hosts
+    ##
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+    - apk add docker
+    - docker --version
+    - docker login registry.gitlab.com -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
+  script:
+    - >
+      docker build 
+      -t $WEB_IMAGE_NAME:$CI_COMMIT_TAG 
+      -t $WEB_IMAGE_NAME:latest
+      -f ./TurnipExchange/Dockerfile .
+    - > 
+      docker build 
+      -t $NGINX_IMAGE_NAME:$CI_COMMIT_TAG 
+      -t $NGINX_IMAGE_NAME:latest 
+      -f ./nginx/Dockerfile .
+
+    - docker push $WEB_IMAGE_NAME:$CI_COMMIT_TAG
+    - docker push $WEB_IMAGE_NAME:latest
+    - docker push $NGINX_IMAGE_NAME:$CI_COMMIT_TAG
+    - docker push $NGINX_IMAGE_NAME:latest
+
+    # generate docker-compose files for prod
+    - chmod +x generate-docker-compose-file.sh
+    - chmod +x generate-override-file.sh
+    - ./generate-docker-compose-file.sh $CI_COMMIT_TAG > docker-compose.yml
+    - ./generate-override-file.sh > docker-compose.override.yml
+
+    # ssh to host, login and pull the new docker image
+    - ssh root@$SERVER_IP "echo "$CI_REGISTRY_PASSWORD" | docker login registry.gitlab.com --username $CI_REGISTRY_USER --password-stdin && docker pull $WEB_IMAGE_NAME:$CI_COMMIT_TAG && docker pull $NGINX_IMAGE_NAME:$CI_COMMIT_TAG"
+    
+    # copy the docker-compose files to host
+    - scp ./docker-compose.yml root@$SERVER_IP:/turnip-exchange/
+    - scp ./docker-compose.override.yml root@$SERVER_IP:/turnip-exchange/
+    
+    # ssh to host 
+    - ssh root@$SERVER_IP "cd /turnip-exchange/ && ls -l && docker-compose up -d && docker ps"
