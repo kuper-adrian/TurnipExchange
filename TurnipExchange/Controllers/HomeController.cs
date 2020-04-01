@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TurnipExchange.Data;
 using TurnipExchange.Models;
+using TurnipExchange.Models.Home;
 
 namespace TurnipExchange.Controllers
 {
 	public class HomeController : Controller
 	{
+		private const int PAGE_SIZE = 25;
+
 		private readonly ILogger<HomeController> _logger;
 		private readonly ApplicationDbContext _context;
 
@@ -22,30 +25,37 @@ namespace TurnipExchange.Controllers
 			_context = context;
 		}
 
-		public async Task<IActionResult> Index()
-		{
-			SaleOffer myOffer = null;
 
-			if (User.Identity.IsAuthenticated)
-			{
-				myOffer = await _context
+		public async Task<IActionResult> Index([FromQuery]int page = 0)
+		{
+			var now = DateTime.Now.ToUniversalTime();
+
+			var myOffer = await _context
 					.Users
 					.Where(u => u.UserName == User.Identity.Name)
-					.Select(u => u.SaleOffer)
+					.SelectMany(u => u.SaleOffers)
+					.OrderByDescending(so => so.Created)
 					.FirstOrDefaultAsync();
-			}
 
-			var offers = await _context
+			var availableOffersQuery = _context
 				.SaleOffer
-				.Include(s => s.User)
-				.OrderByDescending(s => s.Price)
-				.Take(10)
+				.Where(so => so.Expires > now && so.IsActive)
+				.OrderByDescending(so => so.Price);
+
+			var total = await availableOffersQuery.CountAsync();
+			var availableOffers = await availableOffersQuery
+				.Skip(page * PAGE_SIZE)
+				.Take(PAGE_SIZE)
+				.Include(so => so.User)
 				.ToListAsync();
 
-			return View(new Models.Home.IndexModel
+			return View(new IndexViewModel
 			{
-				CurrentOffer = myOffer,
-				Top10Offers = offers,
+				MyOffer = myOffer,
+				AvailableOffers = availableOffers,
+				PageNumber = page,
+				HasPreviousPage = page > 0,
+				HasNextPage = page * PAGE_SIZE + PAGE_SIZE < total,
 			});
 		}
 

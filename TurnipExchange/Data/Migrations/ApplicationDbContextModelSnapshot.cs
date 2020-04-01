@@ -148,30 +148,6 @@ namespace TurnipExchange.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TurnipExchange.Data.InterestedParty", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("SaleOfferId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SaleOfferId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("InterestedParty");
-                });
-
             modelBuilder.Entity("TurnipExchange.Data.SaleOffer", b =>
                 {
                     b.Property<long>("Id")
@@ -180,6 +156,15 @@ namespace TurnipExchange.Data.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("DodoCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Price")
                         .HasColumnType("INTEGER");
@@ -190,8 +175,7 @@ namespace TurnipExchange.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("SaleOffer");
                 });
@@ -214,6 +198,12 @@ namespace TurnipExchange.Data.Migrations
                     b.Property<string>("UtcOffset")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UtcOffsetHours")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UtcOffsetMinutes")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("TimeZone");
@@ -225,7 +215,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ACDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Australian Central Daylight Savings Time",
-                            UtcOffset = "UTC+10:30"
+                            UtcOffset = "UTC+10:30",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -233,7 +225,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ACST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Australian Central Standard Time",
-                            UtcOffset = "UTC +09:30"
+                            UtcOffset = "UTC+09:30",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -241,7 +235,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ACT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Acre Time",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -249,7 +245,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ADT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Atlantic Daylight Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -257,7 +255,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AEDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Australian Eastern Daylight Savings Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -265,15 +265,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AEST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Australian Eastern Standard Time",
-                            UtcOffset = "UTC+10"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            Abbreviation = "AET",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Australian Eastern Time",
-                            UtcOffset = "UTC+10/UTC+11"
+                            UtcOffset = "UTC+10",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -281,7 +275,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AFT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Afghanistan Time",
-                            UtcOffset = "UTC+04:30"
+                            UtcOffset = "UTC+04:30",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -289,7 +285,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AKDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Alaska Daylight Time",
-                            UtcOffset = "UTC−08"
+                            UtcOffset = "UTC−08",
+                            UtcOffsetHours = -8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -297,7 +295,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AKST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Alaska Standard Time",
-                            UtcOffset = "UTC−09"
+                            UtcOffset = "UTC−09",
+                            UtcOffsetHours = -9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -305,7 +305,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ALMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Alma-Ata Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -313,7 +315,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AMST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Amazon Summer Time (Brazil)",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -321,7 +325,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Amazon Time (Brazil)",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -329,7 +335,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Armenia Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -337,7 +345,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ANAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Anadyr Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -345,7 +355,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AQTT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Aqtobe Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -353,7 +365,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ART",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Argentina Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -361,7 +375,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Arabia Standard Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -369,7 +385,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Atlantic Standard Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -377,7 +395,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AWST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Australian Western Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -385,7 +405,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AZOST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Azores Summer Time",
-                            UtcOffset = "UTC±00"
+                            UtcOffset = "UTC±00",
+                            UtcOffsetHours = 0,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -393,7 +415,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AZOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Azores Standard Time",
-                            UtcOffset = "UTC−01"
+                            UtcOffset = "UTC−01",
+                            UtcOffsetHours = -1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -401,7 +425,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "AZT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Azerbaijan Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -409,7 +435,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Brunei Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -417,7 +445,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BIOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "British Indian Ocean Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -425,7 +455,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BIT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Baker Island Time",
-                            UtcOffset = "UTC−12"
+                            UtcOffset = "UTC−12",
+                            UtcOffsetHours = -12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -433,7 +465,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Bolivia Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -441,7 +475,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BRST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Brasília Summer Time",
-                            UtcOffset = "UTC−02"
+                            UtcOffset = "UTC−02",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -449,7 +485,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BRT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Brasília Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -457,7 +495,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Bangladesh Standard Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -465,7 +505,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Bougainville Standard Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -473,7 +515,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "British Summer Time (British Standard Time from Feb 1968 to Oct 1971)",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -481,7 +525,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "BTT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Bhutan Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -489,7 +535,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Central Africa Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -497,7 +545,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CCT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cocos Islands Time",
-                            UtcOffset = "UTC+06:30"
+                            UtcOffset = "UTC+06:30",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -505,7 +555,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Central Daylight Time (North America)",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -513,7 +565,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cuba Daylight Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -521,7 +575,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CEST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Central European Summer Time (Cf. HAEC)",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -529,7 +585,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Central European Time",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -537,7 +595,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CHADT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chatham Daylight Time",
-                            UtcOffset = "UTC+13:45"
+                            UtcOffset = "UTC+13:45",
+                            UtcOffsetHours = 13,
+                            UtcOffsetMinutes = 45
                         },
                         new
                         {
@@ -545,7 +605,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CHAST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chatham Standard Time",
-                            UtcOffset = "UTC+12:45"
+                            UtcOffset = "UTC+12:45",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 45
                         },
                         new
                         {
@@ -553,7 +615,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CHOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Choibalsan Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -561,7 +625,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CHOST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Choibalsan Summer Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -569,7 +635,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CHST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chamorro Standard Time",
-                            UtcOffset = "UTC+10"
+                            UtcOffset = "UTC+10",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -577,7 +645,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CHUT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chuuk Time",
-                            UtcOffset = "UTC+10"
+                            UtcOffset = "UTC+10",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -585,7 +655,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CIST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Clipperton Island Standard Time",
-                            UtcOffset = "UTC−08"
+                            UtcOffset = "UTC−08",
+                            UtcOffsetHours = -8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -593,7 +665,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CIT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Central Indonesia Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -601,7 +675,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cook Island Time",
-                            UtcOffset = "UTC−10"
+                            UtcOffset = "UTC−10",
+                            UtcOffsetHours = -10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -609,7 +685,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CLST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chile Summer Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -617,7 +695,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CLT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chile Standard Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -625,7 +705,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "COST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Colombia Summer Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -633,7 +715,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "COT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Colombia Time",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -641,7 +725,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Central Standard Time (North America)",
-                            UtcOffset = "UTC−06"
+                            UtcOffset = "UTC−06",
+                            UtcOffsetHours = -6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -649,7 +735,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "China Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -657,7 +745,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cuba Standard Time",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -665,7 +755,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "China Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -673,7 +765,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CVT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cape Verde Time",
-                            UtcOffset = "UTC−01"
+                            UtcOffset = "UTC−01",
+                            UtcOffsetHours = -1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -681,7 +775,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "CXT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Christmas Island Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -689,7 +785,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "DAVT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Davis Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -697,7 +795,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "DDUT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Dumont d'Urville Time",
-                            UtcOffset = "UTC+10"
+                            UtcOffset = "UTC+10",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -705,7 +805,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "DFT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "AIX-specific equivalent of Central European Time[NB 1]",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -713,7 +815,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EASST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Easter Island Summer Time",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -721,7 +825,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EAST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Easter Island Standard Time",
-                            UtcOffset = "UTC−06"
+                            UtcOffset = "UTC−06",
+                            UtcOffsetHours = -6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -729,7 +835,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "East Africa Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -737,7 +845,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ECT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern Caribbean Time (does not recognise DST)",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -745,7 +855,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ECT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ecuador Time",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -753,7 +865,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern Daylight Time (North America)",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -761,7 +875,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EEST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern European Summer Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -769,7 +885,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern European Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -777,7 +895,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EGST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern Greenland Summer Time",
-                            UtcOffset = "UTC±00"
+                            UtcOffset = "UTC±00",
+                            UtcOffsetHours = 0,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -785,7 +905,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EGT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern Greenland Time",
-                            UtcOffset = "UTC−01"
+                            UtcOffset = "UTC−01",
+                            UtcOffsetHours = -1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -793,7 +915,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EIT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern Indonesian Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -801,7 +925,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "EST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eastern Standard Time (North America)",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -809,7 +935,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "FET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Further-eastern European Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -817,7 +945,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "FJT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Fiji Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -825,7 +955,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "FKST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Falkland Islands Summer Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -833,7 +965,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "FKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Falkland Islands Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -841,7 +975,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "FNT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Fernando de Noronha Time",
-                            UtcOffset = "UTC−02"
+                            UtcOffset = "UTC−02",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -849,7 +985,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GALT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Galápagos Time",
-                            UtcOffset = "UTC−06"
+                            UtcOffset = "UTC−06",
+                            UtcOffsetHours = -6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -857,7 +995,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GAMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gambier Islands Time",
-                            UtcOffset = "UTC−09"
+                            UtcOffset = "UTC−09",
+                            UtcOffsetHours = -9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -865,7 +1005,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Georgia Standard Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -873,7 +1015,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GFT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "French Guiana Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -881,7 +1025,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GILT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gilbert Island Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -889,7 +1035,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GIT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gambier Island Time",
-                            UtcOffset = "UTC−09"
+                            UtcOffset = "UTC−09",
+                            UtcOffsetHours = -9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -897,7 +1045,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Greenwich Mean Time",
-                            UtcOffset = "UTC±00"
+                            UtcOffset = "UTC±00",
+                            UtcOffsetHours = 0,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -905,7 +1055,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "South Georgia and the South Sandwich Islands Time",
-                            UtcOffset = "UTC−02"
+                            UtcOffset = "UTC−02",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -913,7 +1065,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gulf Standard Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -921,7 +1075,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "GYT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Guyana Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -929,7 +1085,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "HDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hawaii–Aleutian Daylight Time",
-                            UtcOffset = "UTC−09"
+                            UtcOffset = "UTC−09",
+                            UtcOffsetHours = -9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -937,7 +1095,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "HAEC",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Heure Avancée d'Europe Centrale French-language name for CEST",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -945,7 +1105,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "HST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hawaii–Aleutian Standard Time",
-                            UtcOffset = "UTC−10"
+                            UtcOffset = "UTC−10",
+                            UtcOffsetHours = -10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -953,7 +1115,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "HKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hong Kong Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -961,15 +1125,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "HMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Heard and McDonald Islands Time",
-                            UtcOffset = "UTC+05"
-                        },
-                        new
-                        {
-                            Id = 94L,
-                            Abbreviation = "HOVST",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Hovd Summer Time (not used from 2017-present)",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -977,7 +1135,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "HOVT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hovd Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -985,7 +1145,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ICT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Indochina Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -993,7 +1155,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IDLW",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "International Day Line West time zone",
-                            UtcOffset = "UTC−12"
+                            UtcOffset = "UTC−12",
+                            UtcOffsetHours = -12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1001,7 +1165,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Israel Daylight Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1009,7 +1175,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Indian Ocean Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1017,7 +1185,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IRDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Iran Daylight Time",
-                            UtcOffset = "UTC+04:30"
+                            UtcOffset = "UTC+04:30",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1025,7 +1195,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IRKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Irkutsk Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1033,7 +1205,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IRST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Iran Standard Time",
-                            UtcOffset = "UTC+03:30"
+                            UtcOffset = "UTC+03:30",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1041,7 +1215,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Indian Standard Time",
-                            UtcOffset = "UTC+05:30"
+                            UtcOffset = "UTC+05:30",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1049,7 +1225,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Irish Standard Time",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1057,7 +1235,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "IST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Israel Standard Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1065,7 +1245,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "JST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Japan Standard Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1073,7 +1255,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "KALT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Kaliningrad Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1081,7 +1265,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "KGT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Kyrgyzstan Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1089,7 +1275,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "KOST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Kosrae Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1097,7 +1285,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "KRAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Krasnoyarsk Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1105,7 +1295,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "KST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Korea Standard Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1113,7 +1305,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "LHST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Lord Howe Standard Time",
-                            UtcOffset = "UTC+10:30"
+                            UtcOffset = "UTC+10:30",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1121,7 +1315,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "LHST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Lord Howe Summer Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1129,7 +1325,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "LINT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Line Islands Time",
-                            UtcOffset = "UTC+14"
+                            UtcOffset = "UTC+14",
+                            UtcOffsetHours = 14,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1137,7 +1335,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MAGT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Magadan Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1145,7 +1345,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MART",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Marquesas Islands Time",
-                            UtcOffset = "UTC−09:30"
+                            UtcOffset = "UTC−09:30",
+                            UtcOffsetHours = -9,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1153,7 +1355,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MAWT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Mawson Station Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1161,7 +1365,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Mountain Daylight Time (North America)",
-                            UtcOffset = "UTC−06"
+                            UtcOffset = "UTC−06",
+                            UtcOffsetHours = -6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1169,7 +1375,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Middle European Time",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1177,7 +1385,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MEST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Middle European Summer Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1185,7 +1395,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MHT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Marshall Islands Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1193,7 +1405,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MIST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Macquarie Island Station Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1201,7 +1415,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MIT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Marquesas Islands Time",
-                            UtcOffset = "UTC−09:30"
+                            UtcOffset = "UTC−09:30",
+                            UtcOffsetHours = -9,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1209,7 +1425,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Myanmar Standard Time",
-                            UtcOffset = "UTC+06:30"
+                            UtcOffset = "UTC+06:30",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1217,7 +1435,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MSK",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Moscow Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1225,7 +1445,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Malaysia Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1233,7 +1455,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Mountain Standard Time (North America)",
-                            UtcOffset = "UTC−07"
+                            UtcOffset = "UTC−07",
+                            UtcOffsetHours = -7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1241,7 +1465,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MUT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Mauritius Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1249,7 +1475,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MVT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Maldives Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1257,7 +1485,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "MYT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Malaysia Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1265,7 +1495,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NCT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "New Caledonia Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1273,7 +1505,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Newfoundland Daylight Time",
-                            UtcOffset = "UTC−02:30"
+                            UtcOffset = "UTC−02:30",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1281,7 +1515,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NFT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Norfolk Island Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1289,7 +1525,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NOVT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Novosibirsk Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1297,7 +1535,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NPT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Nepal Time",
-                            UtcOffset = "UTC+05:45"
+                            UtcOffset = "UTC+05:45",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 45
                         },
                         new
                         {
@@ -1305,7 +1545,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Newfoundland Standard Time",
-                            UtcOffset = "UTC−03:30"
+                            UtcOffset = "UTC−03:30",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1313,7 +1555,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Newfoundland Time",
-                            UtcOffset = "UTC−03:30"
+                            UtcOffset = "UTC−03:30",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1321,7 +1565,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NUT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Niue Time",
-                            UtcOffset = "UTC−11"
+                            UtcOffset = "UTC−11",
+                            UtcOffsetHours = -11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1329,7 +1575,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NZDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "New Zealand Daylight Time",
-                            UtcOffset = "UTC+13"
+                            UtcOffset = "UTC+13",
+                            UtcOffsetHours = 13,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1337,7 +1585,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "NZST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "New Zealand Standard Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1345,7 +1595,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "OMST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Omsk Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1353,7 +1605,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ORAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Oral Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1361,7 +1615,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pacific Daylight Time (North America)",
-                            UtcOffset = "UTC−07"
+                            UtcOffset = "UTC−07",
+                            UtcOffsetHours = -7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1369,7 +1625,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Peru Time",
-                            UtcOffset = "UTC−05"
+                            UtcOffset = "UTC−05",
+                            UtcOffsetHours = -5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1377,7 +1635,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PETT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Kamchatka Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1385,7 +1645,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PGT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Papua New Guinea Time",
-                            UtcOffset = "UTC+10"
+                            UtcOffset = "UTC+10",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1393,7 +1655,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PHOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Phoenix Island Time",
-                            UtcOffset = "UTC+13"
+                            UtcOffset = "UTC+13",
+                            UtcOffsetHours = 13,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1401,7 +1665,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PHT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Philippine Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1409,7 +1675,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pakistan Standard Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1417,7 +1685,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PMDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Saint Pierre and Miquelon Daylight Time",
-                            UtcOffset = "UTC−02"
+                            UtcOffset = "UTC−02",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1425,7 +1695,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PMST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Saint Pierre and Miquelon Standard Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1433,7 +1705,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PONT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pohnpei Standard Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1441,7 +1715,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pacific Standard Time (North America)",
-                            UtcOffset = "UTC−08"
+                            UtcOffset = "UTC−08",
+                            UtcOffsetHours = -8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1449,7 +1725,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Philippine Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1457,7 +1735,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PYST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Paraguay Summer Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1465,7 +1745,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "PYT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Paraguay Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1473,7 +1755,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "RET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Réunion Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1481,7 +1765,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ROTT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rothera Research Station Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1489,7 +1775,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SAKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sakhalin Island Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1497,7 +1785,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SAMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Samara Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1505,7 +1795,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SAST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "South African Standard Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1513,7 +1805,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SBT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Solomon Islands Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1521,7 +1815,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SCT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Seychelles Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1529,7 +1825,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SDT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Samoa Daylight Time",
-                            UtcOffset = "UTC−10"
+                            UtcOffset = "UTC−10",
+                            UtcOffsetHours = -10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1537,7 +1835,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SGT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Singapore Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1545,7 +1845,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SLST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sri Lanka Standard Time",
-                            UtcOffset = "UTC+05:30"
+                            UtcOffset = "UTC+05:30",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 30
                         },
                         new
                         {
@@ -1553,7 +1855,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SRET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Srednekolymsk Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1561,7 +1865,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SRT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Suriname Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1569,7 +1875,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Samoa Standard Time",
-                            UtcOffset = "UTC−11"
+                            UtcOffset = "UTC−11",
+                            UtcOffsetHours = -11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1577,7 +1885,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Singapore Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1585,7 +1895,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "SYOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Showa Station Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1593,7 +1905,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TAHT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tahiti Time",
-                            UtcOffset = "UTC−10"
+                            UtcOffset = "UTC−10",
+                            UtcOffsetHours = -10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1601,15 +1915,19 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "THA",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Thailand Standard Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
                             Id = 174L,
                             Abbreviation = "TFT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "French Southern and Antarctic Time[12]",
-                            UtcOffset = "UTC+05"
+                            Name = "French Southern and Antarctic Time",
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1617,7 +1935,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TJT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tajikistan Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1625,7 +1945,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tokelau Time",
-                            UtcOffset = "UTC+13"
+                            UtcOffset = "UTC+13",
+                            UtcOffsetHours = 13,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1633,7 +1955,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TLT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Timor Leste Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1641,7 +1965,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TMT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Turkmenistan Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1649,7 +1975,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TRT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Turkey Time",
-                            UtcOffset = "UTC+03"
+                            UtcOffset = "UTC+03",
+                            UtcOffsetHours = 3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1657,7 +1985,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TOT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tonga Time",
-                            UtcOffset = "UTC+13"
+                            UtcOffset = "UTC+13",
+                            UtcOffsetHours = 13,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1665,7 +1995,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "TVT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tuvalu Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1673,7 +2005,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ULAST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ulaanbaatar Summer Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1681,7 +2015,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "ULAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ulaanbaatar Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1689,7 +2025,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "UTC",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Coordinated Universal Time",
-                            UtcOffset = "UTC±00"
+                            UtcOffset = "UTC±00",
+                            UtcOffsetHours = 0,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1697,7 +2035,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "UYST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Uruguay Summer Time",
-                            UtcOffset = "UTC−02"
+                            UtcOffset = "UTC−02",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1705,7 +2045,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "UYT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Uruguay Standard Time",
-                            UtcOffset = "UTC−03"
+                            UtcOffset = "UTC−03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1713,7 +2055,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "UZT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Uzbekistan Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1721,7 +2065,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "VET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Venezuelan Standard Time",
-                            UtcOffset = "UTC−04"
+                            UtcOffset = "UTC−04",
+                            UtcOffsetHours = -4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1729,7 +2075,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "VLAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Vladivostok Time",
-                            UtcOffset = "UTC+10"
+                            UtcOffset = "UTC+10",
+                            UtcOffsetHours = 10,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1737,7 +2085,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "VOLT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Volgograd Time",
-                            UtcOffset = "UTC+04"
+                            UtcOffset = "UTC+04",
+                            UtcOffsetHours = 4,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1745,7 +2095,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "VOST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Vostok Station Time",
-                            UtcOffset = "UTC+06"
+                            UtcOffset = "UTC+06",
+                            UtcOffsetHours = 6,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1753,7 +2105,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "VUT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Vanuatu Time",
-                            UtcOffset = "UTC+11"
+                            UtcOffset = "UTC+11",
+                            UtcOffsetHours = 11,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1761,7 +2115,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WAKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Wake Island Time",
-                            UtcOffset = "UTC+12"
+                            UtcOffset = "UTC+12",
+                            UtcOffsetHours = 12,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1769,7 +2125,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WAST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "West Africa Summer Time",
-                            UtcOffset = "UTC+02"
+                            UtcOffset = "UTC+02",
+                            UtcOffsetHours = 2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1777,7 +2135,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WAT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "West Africa Time",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1785,7 +2145,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WEST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Western European Summer Time",
-                            UtcOffset = "UTC+01"
+                            UtcOffset = "UTC+01",
+                            UtcOffsetHours = 1,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1793,7 +2155,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WET",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Western European Time",
-                            UtcOffset = "UTC±00"
+                            UtcOffset = "UTC±00",
+                            UtcOffsetHours = 0,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1801,7 +2165,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WIT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Western Indonesian Time",
-                            UtcOffset = "UTC+07"
+                            UtcOffset = "UTC+07",
+                            UtcOffsetHours = 7,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1809,7 +2175,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WGST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "West Greenland Summer Time",
-                            UtcOffset = "UTC-02"
+                            UtcOffset = "UTC-02",
+                            UtcOffsetHours = -2,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1817,7 +2185,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WGT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "West Greenland Time",
-                            UtcOffset = "UTC-03"
+                            UtcOffset = "UTC-03",
+                            UtcOffsetHours = -3,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1825,7 +2195,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "WST",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Western Standard Time",
-                            UtcOffset = "UTC+08"
+                            UtcOffset = "UTC+08",
+                            UtcOffsetHours = 8,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1833,7 +2205,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "YAKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Yakutsk Time",
-                            UtcOffset = "UTC+09"
+                            UtcOffset = "UTC+09",
+                            UtcOffsetHours = 9,
+                            UtcOffsetMinutes = 0
                         },
                         new
                         {
@@ -1841,7 +2215,9 @@ namespace TurnipExchange.Data.Migrations
                             Abbreviation = "YEKT",
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Yekaterinburg Time",
-                            UtcOffset = "UTC+05"
+                            UtcOffset = "UTC+05",
+                            UtcOffsetHours = 5,
+                            UtcOffsetMinutes = 0
                         });
                 });
 
@@ -1980,24 +2356,11 @@ namespace TurnipExchange.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TurnipExchange.Data.InterestedParty", b =>
-                {
-                    b.HasOne("TurnipExchange.Data.SaleOffer", "SaleOffer")
-                        .WithMany("InterestedParties")
-                        .HasForeignKey("SaleOfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TurnipExchange.Data.User", "User")
-                        .WithMany("InterestedIn")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("TurnipExchange.Data.SaleOffer", b =>
                 {
                     b.HasOne("TurnipExchange.Data.User", "User")
-                        .WithOne("SaleOffer")
-                        .HasForeignKey("TurnipExchange.Data.SaleOffer", "UserId")
+                        .WithMany("SaleOffers")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

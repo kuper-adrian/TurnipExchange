@@ -3,9 +3,13 @@ using TurnipExchange.Data;
 
 namespace TurnipExchange.Models.Home
 {
-	public class IndexModel
+	public class IndexViewModel
 	{
-		public SaleOffer CurrentOffer { get; set; }
-		public ICollection<SaleOffer> Top10Offers { get; set; } = new List<SaleOffer>();
+		public SaleOffer MyOffer { get; set; }
+		public ICollection<SaleOffer> AvailableOffers { get; set; }
+
+		public int PageNumber { get; set; }
+		public bool HasPreviousPage { get; set; }
+		public bool HasNextPage { get; set; }
 	}
 }

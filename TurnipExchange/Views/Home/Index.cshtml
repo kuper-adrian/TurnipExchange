@@ -1,62 +1,124 @@
-﻿@model TurnipExchange.Models.Home.IndexModel
+﻿@model TurnipExchange.Models.Home.IndexViewModel
 
 @{
     ViewData["Title"] = "Home Page";
+    var now = DateTime.Now.ToUniversalTime();
 }
-
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <h3>Your offer</h3>
-            <hr />
-            @if (User.Identity.IsAuthenticated)
-            {
-                if (Model.CurrentOffer == null)
-                {
-                    <p>Please create a offer</p>
-                }
-                else
-                {
-                    <p>@Model.CurrentOffer.Price Bells</p>
-                }
-            }
-            else
-            {
-                <p>Please log in</p>
-            }
+        <div class="col-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Your offer</h2>
+                        <hr />
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (Model.MyOffer == null)
+                            {
+                                <p>No offer yet...</p>
+                                <a asp-action="Create" asp-controller="Offer" class="btn btn-success">Create</a>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        @if (Model.MyOffer.Expires < now)
+                                        {
+                                            <div class="alert alert-danger" role="alert">
+                                                Offer is expired
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="alert alert-primary" role="alert">
+                                                Expires in ~@(Math.Round((Model.MyOffer.Expires - now).TotalHours, 1)) hours.
+                                            </div>
+                                        }
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-6 col-form-label font-weight-bold">Bells per turnip</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" readonly class="form-control-plaintext" asp-for="MyOffer.Price">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-6 col-form-label font-weight-bold">Dodo Code</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" readonly class="form-control-plaintext" asp-for="MyOffer.DodoCode">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a asp-action="Edit" asp-controller="Offer" asp-route-id="@Model.MyOffer.Id" class="btn btn-outline-secondary">Edit</a>
+                                <a asp-action="Delete" asp-controller="Offer" asp-route-id="@Model.MyOffer.Id" class="btn btn-outline-danger">Remove</a>
+                            }
+                        }
+                        else
+                        {
+                            <p>Please log in</p>
+                            <p>TODO</p>
+                        }
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 30px;">
+                    <div class="col-12">
+                        <h2>TODO</h2>
+                        <hr />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-8">
-            <h3>Current offers</h3>
+        <div class="col-8">
+            <h2>Availabe Offers</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <td scope="col">User</td>
                         <td scope="col">Bells per Turnip</td>
+                        <td scope="col">Dodo Code</td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var offer in Model.Top10Offers)
+                    @foreach (var offer in Model.AvailableOffers)
                     {
-                    <tr>
-                        <td>
-                            @offer.User.UserName
-                        </td>
-                        <td>
-                            @offer.Price
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @offer.User.UserName
+                            </td>
+                            <td>
+                                @offer.Price
+                            </td>
+                            <td>
+                                @offer.DodoCode
+                            </td>
+                            @*<td>
+                                ~@(Math.Round((offer.Expires - now).TotalHours, 1))h
+                            </td>*@
+                        </tr>
                     }
                 </tbody>
             </table>
+            <hr />
+            @if (Model.HasPreviousPage)
+            {
+                <a asp-action="Index" asp-controller="Home" asp-route-page="@(Model.PageNumber - 1)" class="btn btn-outline-primary">Previous</a>
+            }
+            else
+            {
+                <button class="btn btn-outline-primary" disabled>Previous</button>
+            }
+            @if (Model.HasNextPage)
+            {
+                <a asp-action="Index" asp-controller="Home" asp-route-page="@(Model.PageNumber + 1)" class="btn btn-outline-primary">Next</a>
+            }
+            else
+            {
+                <button class="btn btn-outline-primary" disabled>Next</button>
+            }
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            
-        });
-    </script>
-}
