@@ -46,7 +46,6 @@ test:
 
 deploy:
   stage: deploy
-  when: manual
   environment:
     name: production
     url: https://turnip-exchange.com
