@@ -11,14 +11,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Your offer</h2>
+                        <h2>Your sale</h2>
                         <hr />
                         @if (User.Identity.IsAuthenticated)
                         {
                             @if (Model.MyOffer == null)
                             {
-                                <p>No offer yet...</p>
-                                <a asp-action="Create" asp-controller="Offer" class="btn btn-success">Create</a>
+                                <p>No sale</p>
+                                <a asp-action="Create" asp-controller="Offer" class="btn btn-success">Host</a>
                             }
                             else
                             {
@@ -28,7 +28,7 @@
                                         @if (Model.MyOffer.Expires < now)
                                         {
                                             <div class="alert alert-danger" role="alert">
-                                                Offer is expired
+                                                Sale is expired
                                             </div>
                                         }
                                         else
@@ -59,7 +59,7 @@
                         }
                         else
                         {
-                            <p>Please log in to create offers</p>
+                            <p>Please log in to create a sale</p>
                         }
                     </div>
                 </div>
@@ -72,12 +72,12 @@
             </div>
         </div>
         <div class="col-8">
-            <h2>Availabe Offers</h2>
+            <h2>Availabe Sales</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <td scope="col">User</td>
-                        <td scope="col">Bells per Turnip</td>
+                        <td scope="col">Bells per <img style="width: 20px" src="~/img/icons/turnip.svg" /></td>
                         <td scope="col">Dodo Code</td>
                     </tr>
                 </thead>
