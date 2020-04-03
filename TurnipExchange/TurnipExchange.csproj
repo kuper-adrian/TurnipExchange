@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-TurnipExchange-354A8CB0-9A3D-4B45-9A7C-504449AF7600</UserSecretsId>
+    <Version>0.3.0</Version>
   </PropertyGroup>
 
 
