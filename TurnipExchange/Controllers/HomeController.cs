@@ -59,6 +59,11 @@ namespace TurnipExchange.Controllers
 			});
 		}
 
+		public IActionResult Tutorial()
+		{
+			return View();
+		}
+
 		public IActionResult Privacy()
 		{
 			return View();
