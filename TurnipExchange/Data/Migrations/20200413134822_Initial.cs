@@ -190,10 +190,10 @@ namespace TurnipExchange.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Created = table.Column<DateTime>(nullable: false),
                     Price = table.Column<int>(nullable: false),
-                    Expires = table.Column<DateTime>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    DodoCode = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    DodoCode = table.Column<string>(maxLength: 5, nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using TurnipExchange.Data;
 using TurnipExchange.Models;
 using TurnipExchange.Models.Home;
@@ -25,7 +24,6 @@ namespace TurnipExchange.Controllers
 			_context = context;
 		}
 
-
 		public async Task<IActionResult> Index([FromQuery]int page = 0)
 		{
 			var now = DateTime.Now.ToUniversalTime();
@@ -39,7 +37,7 @@ namespace TurnipExchange.Controllers
 
 			var availableOffersQuery = _context
 				.SaleOffer
-				.Where(so => so.Expires > now && so.IsActive)
+				.Where(so => so.IsActive)
 				.OrderByDescending(so => so.Price);
 
 			var total = await availableOffersQuery.CountAsync();
