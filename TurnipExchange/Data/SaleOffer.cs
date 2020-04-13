@@ -7,7 +7,6 @@ namespace TurnipExchange.Data
 	{
 		[Required]
 		public int Price { get; set; }
-		public DateTime Expires { get; set; }
 		public bool IsActive { get; set; }
 
 		[Required]
@@ -17,5 +16,8 @@ namespace TurnipExchange.Data
 
 		public string UserId { get; set; }
 		public User User { get; set; }
+
+		[MaxLength(300)]
+		public string Description { get; set; }
 	}
 }

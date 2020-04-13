@@ -4,11 +4,11 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>offer</h1>
+<h1>Sale</h1>
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -16,21 +16,27 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="DodoCode" class="control-label"></label>
                 <input asp-for="DodoCode" class="form-control" />
                 <span asp-validation-for="DodoCode" class="text-danger"></span>
             </div>
-           
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input asp-for="Id" hidden />
                 <input asp-for="Created" hidden />
-                <input asp-for="Expires" hidden />
                 <input asp-for="IsActive" hidden />
                 <input asp-for="UserId" hidden />
 
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Back</a>
             </div>
         </form>
     </div>

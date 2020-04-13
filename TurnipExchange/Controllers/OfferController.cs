@@ -35,22 +35,9 @@ namespace TurnipExchange.Controllers
 				.Select(u => u.Id)
 				.FirstOrDefaultAsync();
 
-			var created = DateTime.Now.ToUniversalTime();
-			DateTime expires;
-
-			if (created.Hour < 12)
-			{
-				expires = new DateTime(created.Year, created.Month, created.Day, 12, 0, 0);
-			}
-			else
-			{
-				expires = new DateTime(created.Year, created.Month, created.Day, 22, 0, 0);
-			}
-
 			offer.UserId = userId;
-			offer.Created = created;
+			offer.Created = DateTime.Now.ToUniversalTime();
 			offer.IsActive = true;
-			offer.Expires = expires;
 
 			_context.SaleOffer.Add(offer);
 			await _context.SaveChangesAsync();

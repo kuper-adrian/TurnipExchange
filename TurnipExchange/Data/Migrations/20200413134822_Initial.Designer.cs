@@ -9,7 +9,7 @@ using TurnipExchange.Data;
 namespace TurnipExchange.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401174435_Initial")]
+    [Migration("20200413134822_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,11 +159,14 @@ namespace TurnipExchange.Data.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DodoCode")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(300);
 
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("DodoCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(5);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
